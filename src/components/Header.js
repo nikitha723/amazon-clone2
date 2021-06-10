@@ -154,6 +154,15 @@ function Header(props) {
                 <p className="link hidden lg:inline-flex">
                     Fashion
                 </p>
+                <p className="link hidden lg:inline-flex">
+                    Kindle Books
+                </p>
+                <p className="link hidden lg:inline-flex">
+                    Toys & Games
+                </p>
+                <p className="link hidden lg:inline-flex">
+                    Gift Cards
+                </p>
             </div>
             {/* {primeModal} */}
         </header>
