@@ -15,13 +15,13 @@ export default function Subheader() {
               />
           </div>
           <div className="flex items-center space-x-20 text-xs text-amazon_blue-light">
-                <p className="link hover:underline text-orange-500">Women</p>
-                <p className="link">Men</p>
-                <p className="link">Kids</p>
-                <p className="link">Luggage</p>
-                <p className="link">Sales & Deals</p>
-                <p className="link">New Arrivals</p>
-                <p className="link">Our Brands</p>
+                <p className="link hidden md:inline-flex">Women</p>
+                <p className="link hidden md:inline-flex">Men</p>
+                <p className="link hidden md:inline-flex">Kids</p>
+                <p className="link hidden lg:inline-flex">Luggage</p>
+                <p className="link hidden lg:inline-flex">Sales & Deals</p>
+                <p className="link hidden lg:inline-flex">New Arrivals</p>
+                <p className="link hidden lg:inline-flex">Our Brands</p>
                 <div className="justify-between">
               <Image
                 src="https://images-na.ssl-images-amazon.com/images/G/01/softlines/subnav/images/pwFlyout/icons/prime_wardrobe_logo._CB485931548_.png"

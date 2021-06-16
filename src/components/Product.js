@@ -4,11 +4,14 @@ import Currency from 'react-currency-formatter'
 import {StarIcon} from "@heroicons/react/solid"
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux';
+import { addItemDetails } from '../slices/itemDetailSlice'
 
 function Product({id, title, description, image, category, price}) {
     const MAX_RATING = 5;
     const MIN_RATING = 1;
     const router = useRouter()
+    const dispatch = useDispatch()
     
     const [rating] = useState(
         Math.floor(Math.random() * (MAX_RATING - MIN_RATING + 1)) + MIN_RATING 
@@ -26,6 +29,10 @@ function Product({id, title, description, image, category, price}) {
     //     console.log('id', id)
     //     router.push(`/${id}`)
     // } 
+    const addItem = () => {
+        const itemDetails = {id, rating, hasPrime, hasLimitedTimeDeal}
+        dispatch(addItemDetails(itemDetails))
+    }
 
     return (
         <Link href={`/${id}`}>
@@ -34,7 +41,7 @@ function Product({id, title, description, image, category, price}) {
              pathname: '/[id]',
              query: { id: id },
            }}> */}
-        <div className="relative flex flex-col items-center m-5 cursor-pointer bg-white z-30 p-10">
+        <div className="relative flex flex-col items-center m-5 cursor-pointer bg-white z-30 p-10"  onClick={addItem}>
             <p className="absolute top-2 right-2 text-gray-300 text-sm italic">{category}</p>
             <Image 
                 src={image}

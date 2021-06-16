@@ -8,11 +8,18 @@ import {
 } from '@heroicons/react/outline'
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import RadioButtonCheckedOutlinedIcon from '@material-ui/icons/RadioButtonCheckedOutlined';
+import { signIn, signOut, useSession } from 'next-auth/client'
+import { useRouter } from 'next/router';
+import { selectItems } from '../slices/cartSlice'
+import { useSelector } from 'react-redux';
 
 function Header(props) {
 
     const [showRegion, setShowRegion] = useState(false)
     const [showPrimeModal, setShowPrimeModal] = useState(false)
+    const [session] = useSession()
+    const router = useRouter()
+    const items = useSelector(selectItems)
 
     const region = (
         <div className="absolute  justify-between w-60 bg-white border top-25 right-25 p-5 mt-5 cursor-default">
@@ -62,12 +69,14 @@ function Header(props) {
         </div>
         
     )
+
+    // console.log(items)
     
     return (
         <header>
             <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
                 {/* logo */}
-                <div className="mt-2 flex items-center flex-grow sm:flex-grow-0">
+                <div className="mt-2 flex items-center flex-grow sm:flex-grow-0" onClick={() => router.push("/")}>
                     <Image 
                         src="https://links.papareact.com/f90"
                         width={150}
@@ -105,8 +114,12 @@ function Header(props) {
                     </div>
                     
 
-                    <div className="link">
-                        <p>Hello, Nikitha Devan</p>
+                    <div className="link" onClick={!session ? signIn : signOut}>
+                        <p>
+                            {
+                                session ? `Hello, ${session.user.name}` : 'Sign In'
+                            }
+                        </p>
                         <p className="font-bold md:text-sm">Account & Lists</p>
                     </div>
 
@@ -115,8 +128,8 @@ function Header(props) {
                         <p className="font-bold md:text-sm">& Orders</p>
                     </div>
 
-                    <div className="relative link flex items-center">
-                        <span className="absolute top-0 right-0 md:right-6 h-4 w-4 bg-yellow-400 text-center text-black font-bold rounded-full">0</span>
+                    <div className="relative link flex items-center" onClick={() => router.push('/checkout')}>
+                        <span className="absolute top-0 right-0 md:right-6 h-4 w-4 bg-yellow-400 text-center text-black font-bold rounded-full">{items.length}</span>
                         <ShoppingCartIcon className="h-10" />
                         <p className="hidden md:inline font-bold text-sm pt-3">Cart</p>
                     </div>
